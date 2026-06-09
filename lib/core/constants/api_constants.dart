@@ -1,7 +1,7 @@
 class ApiConstants {
   // غير هذا لـ IP الجهاز عند الاختبار على موبايل حقيقي
-  // مثال: 'http://192.168.1.X/خيول/api'
-  static const String baseUrl = 'http://10.0.2.2/khyol/api'; // للمحاكي
+  // مثال: 'http://192.168.1.X/khyol_app/api'
+  static const String baseUrl = 'http://10.0.2.2/khyol_app/api'; // للمحاكي
 
   // Auth
   static const String login = '$baseUrl/auth/login.php';
