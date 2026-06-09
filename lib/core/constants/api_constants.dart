@@ -25,6 +25,7 @@ class ApiConstants {
 
   // Horses
   static const String horsesMarket = '$baseUrl/horses/market.php';
+  static const String horse = '$baseUrl/horses/detail.php';
   static const String myHorses = '$baseUrl/horses/my.php';
 
   // Auctions

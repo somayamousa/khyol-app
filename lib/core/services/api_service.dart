@@ -121,6 +121,64 @@ class AuctionService {
 class EventService {
   static Future<ApiResponse<Map<String, dynamic>>> getEvents() =>
       ApiService.get(ApiConstants.events);
+
+  static Future<ApiResponse<Map<String, dynamic>>> getEvent(int id) =>
+      ApiService.get(ApiConstants.event, params: {'id': id.toString()});
+}
+
+class HorseService {
+  static Future<ApiResponse<Map<String, dynamic>>> getHorsesMarket() =>
+      ApiService.get(ApiConstants.horsesMarket);
+
+  static Future<ApiResponse<Map<String, dynamic>>> getHorse(int id) =>
+      ApiService.get(ApiConstants.horse, params: {'id': id.toString()});
+
+  static Future<ApiResponse<Map<String, dynamic>>> contactOwner(int horseId, String message) =>
+      ApiService.post('${ApiConstants.baseUrl}/horses/contact.php', {'horse_id': horseId, 'message': message});
+}
+
+class ChatService {
+  static Future<ApiResponse<Map<String, dynamic>>> getConversations() =>
+      ApiService.get(ApiConstants.conversations);
+
+  static Future<ApiResponse<Map<String, dynamic>>> getMessages(int conversationId) =>
+      ApiService.get(ApiConstants.messages, params: {'conversation_id': conversationId.toString()});
+
+  static Future<ApiResponse<Map<String, dynamic>>> sendMessage(int conversationId, String body) =>
+      ApiService.post(ApiConstants.sendMessage, {'conversation_id': conversationId, 'body': body});
+}
+
+class ClinicService {
+  static Future<ApiResponse<Map<String, dynamic>>> getClinics() =>
+      ApiService.get(ApiConstants.clinics);
+
+  static Future<ApiResponse<Map<String, dynamic>>> getClinic(int id) =>
+      ApiService.get('${ApiConstants.baseUrl}/clinics/detail.php', params: {'id': id.toString()});
+
+  static Future<ApiResponse<Map<String, dynamic>>> getAppointments() =>
+      ApiService.get(ApiConstants.appointments);
+
+  static Future<ApiResponse<Map<String, dynamic>>> bookAppointment(Map<String, dynamic> data) =>
+      ApiService.post(ApiConstants.appointments, data);
+}
+
+class OfferService {
+  static Future<ApiResponse<Map<String, dynamic>>> getOffers() =>
+      ApiService.get(ApiConstants.offers);
+}
+
+class AccountService {
+  static Future<ApiResponse<Map<String, dynamic>>> getProfile() =>
+      ApiService.get(ApiConstants.account);
+
+  static Future<ApiResponse<Map<String, dynamic>>> updateProfile(Map<String, dynamic> data) =>
+      ApiService.post(ApiConstants.updateAccount, data);
+
+  static Future<ApiResponse<Map<String, dynamic>>> getMyBookings() =>
+      ApiService.get(ApiConstants.myBookings);
+
+  static Future<ApiResponse<Map<String, dynamic>>> getMyBids() =>
+      ApiService.get('${ApiConstants.baseUrl}/auctions/my_bids.php');
 }
 
 class NotificationService {

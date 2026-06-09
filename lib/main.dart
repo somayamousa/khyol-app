@@ -7,6 +7,24 @@ import 'ui/screens/auth/splash_screen.dart';
 import 'ui/screens/auth/login_screen.dart';
 import 'ui/screens/auth/register_screen.dart';
 import 'ui/screens/home/main_shell.dart';
+import 'ui/screens/shop/product_detail_screen.dart';
+import 'ui/screens/shop/cart_screen.dart';
+import 'ui/screens/centers/centers_screen.dart';
+import 'ui/screens/centers/center_detail_screen.dart';
+import 'ui/screens/horses/horses_screen.dart';
+import 'ui/screens/horses/horse_detail_screen.dart';
+import 'ui/screens/auctions/auctions_screen.dart';
+import 'ui/screens/auctions/auction_detail_screen.dart';
+import 'ui/screens/events/events_screen.dart';
+import 'ui/screens/events/event_detail_screen.dart';
+import 'ui/screens/notifications/notifications_screen.dart';
+import 'ui/screens/bookings/my_bookings_screen.dart';
+import 'ui/screens/bookings/booking_screen.dart';
+import 'ui/screens/chat/conversations_screen.dart';
+import 'ui/screens/clinics/clinics_screen.dart';
+import 'ui/screens/offers/offers_screen.dart';
+import 'ui/screens/account/my_orders_screen.dart';
+import 'ui/screens/account/my_bids_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,45 +63,68 @@ class KhyolApp extends StatelessWidget {
         '/login': (_) => const LoginScreen(),
         '/register': (_) => const RegisterScreen(),
         '/home': (_) => const MainShell(),
+        '/cart': (_) => const CartScreen(),
+        '/centers': (_) => const CentersScreen(),
+        '/events': (_) => const EventsScreen(),
+        '/notifications': (_) => const NotificationsScreen(),
+        '/bookings': (_) => const MyBookingsScreen(),
       },
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case '/product':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('تفاصيل المنتج'));
+            final id = settings.arguments as int? ?? 0;
+            return MaterialPageRoute(builder: (_) => ProductDetailScreen(id: id));
+
           case '/center':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('تفاصيل المركز'));
-          case '/centers':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('المراكز'));
+            final id = settings.arguments as int? ?? 0;
+            return MaterialPageRoute(builder: (_) => CenterDetailScreen(id: id));
+
           case '/horse':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('تفاصيل الحصان'));
+            final id = settings.arguments as int? ?? 0;
+            return MaterialPageRoute(builder: (_) => HorseDetailScreen(id: id));
+
           case '/auction':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('المزاد'));
+            final id = settings.arguments as int? ?? 0;
+            return MaterialPageRoute(builder: (_) => AuctionDetailScreen(id: id));
+
           case '/event':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('الفعالية'));
-          case '/events':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('الفعاليات'));
+            final id = settings.arguments as int? ?? 0;
+            return MaterialPageRoute(builder: (_) => EventDetailScreen(id: id));
+
+          case '/book':
+            final args = settings.arguments as Map<String, dynamic>? ?? {};
+            return MaterialPageRoute(
+              builder: (_) => BookingScreen(
+                centerId: args['center_id'] as int? ?? 0,
+                package: args['package'] as Map<String, dynamic>? ?? {},
+              ),
+            );
+
           case '/shop':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('المتجر'));
-          case '/cart':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('السلة'));
+            return MaterialPageRoute(builder: (_) => const MainShell(initialIndex: 1));
+
+          case '/horses-market':
+            return MaterialPageRoute(builder: (_) => const HorsesScreen());
+
+          case '/auctions':
+            return MaterialPageRoute(builder: (_) => const AuctionsScreen());
+
           case '/chat':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('المحادثات'));
-          case '/notifications':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('الإشعارات'));
+            return MaterialPageRoute(builder: (_) => const ConversationsScreen());
           case '/orders':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('طلباتي'));
-          case '/bookings':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('حجوزاتي'));
+            return MaterialPageRoute(builder: (_) => const MyOrdersScreen());
+          case '/my-bids':
+            return MaterialPageRoute(builder: (_) => const MyBidsScreen());
+          case '/clinics':
+            return MaterialPageRoute(builder: (_) => const ClinicsScreen());
+          case '/offers':
+            return MaterialPageRoute(builder: (_) => const OffersScreen());
           case '/my-horses':
             return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('خيولي'));
-          case '/my-bids':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('مزايداتي'));
           case '/photographers':
             return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('التصوير'));
           case '/boarding':
             return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('الإيواء والتدريب'));
-          case '/clinics':
-            return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('العيادات البيطرية'));
           case '/admin':
             return MaterialPageRoute(builder: (_) => const _PlaceholderScreen('لوحة التحكم'));
           default:
